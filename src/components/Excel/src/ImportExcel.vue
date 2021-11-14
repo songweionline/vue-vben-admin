@@ -31,6 +31,9 @@
         type: Number,
         default: 8,
       },
+      headFormat: {
+        type: Object,
+      },
     },
     emits: ['success', 'error'],
     setup(props, { emit }) {
@@ -80,6 +83,14 @@
                 }
                 if (dateFormat) {
                   row[field] = dateUtil(row[field]).format(dateFormat);
+                }
+              }
+              if (props.headFormat) {
+                for (let key in props.headFormat) {
+                  if (props.headFormat[key] === field) {
+                    row[key] = row[field];
+                    delete row[field];
+                  }
                 }
               }
             }
