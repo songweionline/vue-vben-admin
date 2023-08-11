@@ -118,7 +118,8 @@ export class VAxios {
     responseInterceptorsCatch &&
       isFunction(responseInterceptorsCatch) &&
       this.axiosInstance.interceptors.response.use(undefined, (error) => {
-        return responseInterceptorsCatch(axiosInstance, error);
+        // 不清楚这里的axiosInstance是哪里来的，是否就是this.axiosInstance？
+        return responseInterceptorsCatch(this.axiosInstance, error);
       });
   }
 
